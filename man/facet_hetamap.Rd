@@ -10,6 +10,7 @@ facet_hetamap(
   scales = "free_x",
   strip.col = NULL,
   space = "free_x",
+  no.xlabel = TRUE,
   ...
 )
 }
@@ -23,6 +24,8 @@ facet_hetamap(
 \item{strip.col}{Background color for facet strip labels (optional).}
 
 \item{space}{Space argument for facet_grid2 (default is "free_x").}
+
+\item{no.xlabel}{Whether remove x axis labels (default is "TRUE").}
 
 \item{...}{Additional arguments passed to ggh4x::facet_grid2.}
 }

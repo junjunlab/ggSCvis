@@ -16,7 +16,7 @@ facet_feature <- function(facets = "gene_name",ncol = 4,scales = "free",
                           strip = ggh4x::strip_themed(background_x =
                                                         ggh4x::elem_list_rect(fill = strip.col),
                           ),...),
-       coord_cartesian(clip = "off"))
+       theme_bw())
 }
 
 
@@ -31,6 +31,7 @@ facet_feature <- function(facets = "gene_name",ncol = 4,scales = "free",
 #' @param scales Scales argument for facet_grid2 (default is "free_x").
 #' @param strip.col Background color for facet strip labels (optional).
 #' @param space Space argument for facet_grid2 (default is "free_x").
+#' @param no.xlabel Whether remove x axis labels (default is "TRUE").
 #' @param ... Additional arguments passed to ggh4x::facet_grid2.
 #'
 #' @return A custom facet grid for hetamap plotting.
@@ -40,6 +41,7 @@ facet_hetamap <- function(facet_col = NULL,
                           scales = "free_x",
                           strip.col = NULL,
                           space = "free_x",
+                          no.xlabel = TRUE,
                           ...){
   if(!is.null(facet_col)){
     facet_col <- vars(!!!rlang::ensyms(facet_col))
@@ -49,13 +51,23 @@ facet_hetamap <- function(facet_col = NULL,
     facet_row <- vars(!!!rlang::ensyms(facet_row))
   }
 
+  if(no.xlabel == TRUE){
+    ele <- element_blank()
+  }else{
+    ele <- element_text()
+  }
+
   list(ggh4x::facet_grid2(rows = facet_row,cols = facet_col,
                           scales = scales,
                           strip = ggh4x::strip_themed(background_x =
                                                         ggh4x::elem_list_rect(fill = strip.col),
+                                                      background_y =
+                                                        ggh4x::elem_list_rect(fill = strip.col),
                           ),
                           space = space,
                           ...),
-       theme(axis.ticks.x = element_blank(),
-             axis.text.x = element_blank()))
+       theme_bw() +
+         theme(axis.ticks.x = ele,
+               axis.text.x = ele,
+               panel.grid = element_blank()))
 }

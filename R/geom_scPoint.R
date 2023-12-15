@@ -11,6 +11,7 @@ ggname <- getFromNamespace("ggname", "ggplot2")
 #' @param data A data frame containing the single-cell data.
 #' @param stat The statistical transformation to apply (default is "identity").
 #' @param position The positioning transformation to apply (default is "identity").
+#' @param label.gp Cluster labels settings.
 #' @param ... Additional arguments passed to the geom.
 #' @param na.rm Should missing values be removed (default is FALSE).
 #' @param show.legend Should the legend be displayed (default is NA).
@@ -20,7 +21,7 @@ ggname <- getFromNamespace("ggname", "ggplot2")
 #' @export
 geom_scPoint <- function(mapping = NULL, data = NULL,
                          stat = "identity", position = "identity",
-                         ...,
+                         ...,label.gp = NULL,
                          na.rm = FALSE,
                          show.legend = NA,
                          inherit.aes = TRUE) {
@@ -34,6 +35,7 @@ geom_scPoint <- function(mapping = NULL, data = NULL,
     inherit.aes = inherit.aes,
     params = rlang::list2(
       na.rm = na.rm,
+      label.gp = label.gp,
       ...
     )
   )

@@ -10,6 +10,7 @@ geom_scPoint(
   stat = "identity",
   position = "identity",
   ...,
+  label.gp = NULL,
   na.rm = FALSE,
   show.legend = NA,
   inherit.aes = TRUE
@@ -25,6 +26,8 @@ geom_scPoint(
 \item{position}{The positioning transformation to apply (default is "identity").}
 
 \item{...}{Additional arguments passed to the geom.}
+
+\item{label.gp}{Cluster labels settings.}
 
 \item{na.rm}{Should missing values be removed (default is FALSE).}
 
