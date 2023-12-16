@@ -12,6 +12,10 @@
 #' @param pct.exp.var A variable for percentage of expression (default is "seurat_clusters").
 #' @param slot The data slot to use from the Seurat object (default is "data").
 #' @param environment environment.
+#' @param t the top margin of the plot (default is 0.1 npc).
+#' @param r the right margin of the plot (default is 0.1 npc).
+#' @param b the bottom margin of the plot (default is 0.1 npc).
+#' @param l the left margin of the plot (default is 0.1 npc).
 #' @param ... Additional arguments passed to ggplot.
 #'
 #' @return A ggplot object.
@@ -32,6 +36,7 @@ ggscplot <- function(data = NULL,
                      featuresAnno = 0,
                      pct.exp.var = "seurat_clusters",
                      slot = "data",
+                     t = 0.1,r = 0.1,b = 0.1,l = 0.1,
                      environment = parent.frame(),
                      ...) {
 
@@ -49,6 +54,7 @@ ggscplot <- function(data = NULL,
   p <- ggplot(data = data,
               mapping = mapping,
               ...) +
+    theme(plot.margin = margin(t = t,r = r,b = b,l = l,unit = "npc")) +
     coord_cartesian(clip = "off")
 
   class(p) <- c("ggscplot", class(p))

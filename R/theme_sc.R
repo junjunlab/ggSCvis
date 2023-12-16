@@ -11,6 +11,10 @@
 #' @param border.col Color of the plot border (default is NA).
 #' @param add.arrow Should arrows be added to the axis lines? (default is TRUE).
 #' @param ... Additional arguments passed to ggplot2 theme.
+#' @param t the top margin of the plot (default is 0.1 npc).
+#' @param r the right margin of the plot (default is 0.1 npc).
+#' @param b the bottom margin of the plot (default is 0.1 npc).
+#' @param l the left margin of the plot (default is 0.1 npc).
 #'
 #' @return A ggplot2 theme object customized for single-cell plots.
 #'
@@ -19,6 +23,7 @@ theme_sc <- function(x.line.len = 0.25,x.label = "dim 1",
                      y.line.len = 0.25,y.label = "dim 1",
                      label.shift = -2.5,fontsize = 10,
                      border.col = NA,add.arrow = TRUE,
+                     t = 0.1,r = 0.1,b = 0.1,l = 0.1,
                      ...) {
   if(add.arrow == TRUE){
     axis.line.x.bottom <- element_line2(x.line.ed = x.line.len,y.line.st = 1,
@@ -56,7 +61,7 @@ theme_sc <- function(x.line.len = 0.25,x.label = "dim 1",
       axis.text = element_blank(),
       axis.title = element_blank(),
       panel.grid = element_blank(),
-      plot.margin = margin(t = 1,r = 1,b = 1,l = 1,unit = "cm"),
+      plot.margin = margin(t = t,r = r,b = b,l = l,unit = "npc"),
       panel.spacing = unit(0.5,"cm"),
 
       complete = F

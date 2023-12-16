@@ -13,6 +13,10 @@ ggscplot(
   featuresAnno = 0,
   pct.exp.var = "seurat_clusters",
   slot = "data",
+  t = 0.1,
+  r = 0.1,
+  b = 0.1,
+  l = 0.1,
   environment = parent.frame(),
   ...
 )
@@ -33,6 +37,14 @@ ggscplot(
 \item{pct.exp.var}{A variable for percentage of expression (default is "seurat_clusters").}
 
 \item{slot}{The data slot to use from the Seurat object (default is "data").}
+
+\item{t}{the top margin of the plot (default is 0.1 npc).}
+
+\item{r}{the right margin of the plot (default is 0.1 npc).}
+
+\item{b}{the bottom margin of the plot (default is 0.1 npc).}
+
+\item{l}{the left margin of the plot (default is 0.1 npc).}
 
 \item{environment}{environment.}
 

@@ -13,6 +13,10 @@ theme_sc(
   fontsize = 10,
   border.col = NA,
   add.arrow = TRUE,
+  t = 0.1,
+  r = 0.1,
+  b = 0.1,
+  l = 0.1,
   ...
 )
 }
@@ -32,6 +36,14 @@ theme_sc(
 \item{border.col}{Color of the plot border (default is NA).}
 
 \item{add.arrow}{Should arrows be added to the axis lines? (default is TRUE).}
+
+\item{t}{the top margin of the plot (default is 0.1 npc).}
+
+\item{r}{the right margin of the plot (default is 0.1 npc).}
+
+\item{b}{the bottom margin of the plot (default is 0.1 npc).}
+
+\item{l}{the left margin of the plot (default is 0.1 npc).}
 
 \item{...}{Additional arguments passed to ggplot2 theme.}
 }
