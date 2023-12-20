@@ -52,9 +52,11 @@ facet_hetamap <- function(facet_col = NULL,
   }
 
   if(no.xlabel == TRUE){
-    ele <- element_blank()
+    ele.tick <- element_blank()
+    ele.text <- element_blank()
   }else{
-    ele <- element_text()
+    ele.tick <- element_line()
+    ele.text <- element_text()
   }
 
   list(ggh4x::facet_grid2(rows = facet_row,cols = facet_col,
@@ -67,7 +69,8 @@ facet_hetamap <- function(facet_col = NULL,
                           space = space,
                           ...),
        theme_bw() +
-         theme(axis.ticks.x = ele,
-               axis.text.x = ele,
+         theme(axis.ticks.x = ele.tick,
+               axis.text.x = ele.text,
+               strip.text = element_text(face = "bold.italic"),
                panel.grid = element_blank()))
 }

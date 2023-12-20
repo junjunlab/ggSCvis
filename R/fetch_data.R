@@ -91,6 +91,33 @@ fetch_data <- function(object = NULL,
       return(tmp)
     }) %>% Reduce("rbind",.) -> megredf
 
+    # ==========================================================================
+    # add suffix for duplicate features
+    if(length(featuresAnno) > 1){
+      uni_f <- unique(features)
+      lapply(seq_along(uni_f), function(x){
+        tmp <- subset(megredf,gene_name %in% uni_f[x])
+        anno_f <- unique(tmp$featureAnno)
+
+        # check anno types length
+        if(length(anno_f) > 1){
+          lapply(seq_along(anno_f), function(x){
+            tmp2 <- subset(tmp,featureAnno %in% anno_f[x])
+            tmp2$gene_name <- paste0(tmp2$gene_name,"_",x)
+
+            return(tmp2)
+          }) %>% Reduce("rbind",.) -> add_name
+          return(add_name)
+        }else{
+          return(tmp)
+        }
+      }) %>% Reduce("rbind",.) %>% dplyr::arrange(.data[["featureAnno"]]) -> megredf
+
+      # order
+      od <- unique(megredf[,c("featureAnno","gene_name")])
+      megredf$gene_name <- factor(megredf$gene_name,levels = od$gene_name)
+    }
+
     megredf <- megredf %>% dplyr::group_by(.data[["gene_name"]]) %>%
       dplyr::arrange(.data[["value"]])
 

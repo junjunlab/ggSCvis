@@ -18,6 +18,7 @@ geom_scPoint2(
   add_legend = FALSE,
   ncol = 1,
   vgap = 0.5,
+  hgap = 1,
   point.size = 2,
   point.label.size = 10,
   point.label.col = "black",
@@ -56,6 +57,8 @@ geom_scPoint2(
 
 \item{vgap}{Vertical gap between legend items (default is 0.5).}
 
+\item{hgap}{Horizontal gap between legend items (default is 1).}
+
 \item{point.size}{Size of legend points (default is 2).}
 
 \item{point.label.size}{Size of legend point labels (default is 10).}
@@ -73,8 +76,6 @@ geom_scPoint2(
 \item{fontsize}{Font size for labels and legend (default is 10).}
 
 \item{fontface}{Font face for labels and legend (default is "plain").}
-
-\item{hgap}{Horizontal gap between legend items (default is 1).}
 }
 \value{
 A custom ggplot2 geom for single-cell data point plotting with labels and legend.
