@@ -1,4 +1,4 @@
-globalVariables(c("value",".","gene_name","Dim1","Dim2"))
+globalVariables(c("value",".","gene_name","Dim1","Dim2","featureAnno","celltype","x","y"))
 
 #' Fetch data from Seurat object
 #'

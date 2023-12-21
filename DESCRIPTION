@@ -14,6 +14,7 @@ Imports:
     circlize,
     cli,
     dplyr,
+    ggdendro,
     ggh4x,
     ggplot2,
     grid,
@@ -22,4 +23,6 @@ Imports:
     reshape2,
     rlang,
     Seurat,
-    stats
+    stats,
+    tibble,
+    tidyr

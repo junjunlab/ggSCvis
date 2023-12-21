@@ -15,6 +15,7 @@
 #' @param r the right margin of the plot (default is 0.1 npc).
 #' @param b the bottom margin of the plot (default is 0.1 npc).
 #' @param l the left margin of the plot (default is 0.1 npc).
+#' @param key.size legend size (default is 5).
 #'
 #' @return A ggplot2 theme object customized for single-cell plots.
 #'
@@ -24,6 +25,7 @@ theme_sc <- function(x.line.len = 0.25,x.label = "dim 1",
                      label.shift = -2.5,fontsize = 10,
                      border.col = NA,add.arrow = TRUE,
                      t = 0.1,r = 0.1,b = 0.1,l = 0.1,
+                     key.size = 5,
                      ...) {
   if(add.arrow == TRUE){
     axis.line.x.bottom <- element_line2(x.line.ed = x.line.len,y.line.st = 1,
@@ -44,26 +46,29 @@ theme_sc <- function(x.line.len = 0.25,x.label = "dim 1",
     axis.line.y.left <- element_blank()
   }
 
-  theme_grey(...) %+replace%
-    theme(
-      # axis.line = element_blank(),
-      axis.line.x.bottom = axis.line.x.bottom,
-      axis.line.y.left = axis.line.y.left,
+  list(theme_grey(...) %+replace%
+         theme(
+           # axis.line = element_blank(),
+           axis.line.x.bottom = axis.line.x.bottom,
+           axis.line.y.left = axis.line.y.left,
 
-      # white background and dark border
-      panel.background = element_rect(fill = "white", colour = NA),
-      panel.border     = element_rect(fill = NA, colour = border.col),
-      # contour strips to match panel contour
-      strip.background = element_rect(fill = "grey90", colour = "black"),
-      strip.text = element_text(face = "bold.italic"),
+           # white background and dark border
+           panel.background = element_rect(fill = "white", colour = NA),
+           panel.border     = element_rect(fill = NA, colour = border.col),
+           # contour strips to match panel contour
+           strip.background = element_rect(fill = "grey90", colour = "black"),
+           strip.text = element_text(face = "bold.italic"),
 
-      axis.ticks = element_blank(),
-      axis.text = element_blank(),
-      axis.title = element_blank(),
-      panel.grid = element_blank(),
-      plot.margin = margin(t = t,r = r,b = b,l = l,unit = "npc"),
-      panel.spacing = unit(0.5,"cm"),
+           axis.ticks = element_blank(),
+           axis.text = element_blank(),
+           axis.title = element_blank(),
+           panel.grid = element_blank(),
+           plot.margin = margin(t = t,r = r,b = b,l = l,unit = "npc"),
+           panel.spacing = unit(0.5,"cm"),
 
-      complete = F
-    )
+           complete = F
+         ),
+       guides(color = guide_legend(override.aes = list(size = key.size)))
+       )
+
 }
