@@ -24,7 +24,7 @@ remotes::install_github("junjunlab/ggSCvis")
 
 ## Citation
 
--
+> Jun Zhang (2023). *Visualizing SingleCell data Using GGplot2.*  https://github.com/junjunlab/ggSCvis
 
 ---
 
