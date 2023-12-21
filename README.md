@@ -29,7 +29,7 @@ remotes::install_github("junjunlab/ggSCvis")
 ---
 
 ## News
-
+- 2023/12/21  (Adding **geom_scDot/geom_scTile/geom_scViolin** funcs.)
 - 2023/12/15  (First version pushed.)
 ---
 
