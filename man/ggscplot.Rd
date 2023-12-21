@@ -13,6 +13,7 @@ ggscplot(
   featuresAnno = 0,
   pct.exp.var = "seurat_clusters",
   slot = "data",
+  gene.order = NULL,
   t = 0.1,
   r = 0.1,
   b = 0.1,
@@ -38,6 +39,8 @@ ggscplot(
 
 \item{slot}{The data slot to use from the Seurat object (default is "data").}
 
+\item{gene.order}{description}
+
 \item{t}{the top margin of the plot (default is 0.1 npc).}
 
 \item{r}{the right margin of the plot (default is 0.1 npc).}
@@ -46,7 +49,7 @@ ggscplot(
 
 \item{l}{the left margin of the plot (default is 0.1 npc).}
 
-\item{environment}{environment.}
+\item{environment}{The levels of the gene name.}
 
 \item{...}{Additional arguments passed to ggplot.}
 }

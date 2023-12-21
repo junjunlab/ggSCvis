@@ -11,7 +11,8 @@
 #' @param featuresAnno Annotation level for features (default is 0).
 #' @param pct.exp.var A variable for percentage of expression (default is "seurat_clusters").
 #' @param slot The data slot to use from the Seurat object (default is "data").
-#' @param environment environment.
+#' @param environment The levels of the gene name.
+#' @param gene.order description
 #' @param t the top margin of the plot (default is 0.1 npc).
 #' @param r the right margin of the plot (default is 0.1 npc).
 #' @param b the bottom margin of the plot (default is 0.1 npc).
@@ -36,6 +37,7 @@ ggscplot <- function(data = NULL,
                      featuresAnno = 0,
                      pct.exp.var = "seurat_clusters",
                      slot = "data",
+                     gene.order = NULL,
                      t = 0.1,r = 0.1,b = 0.1,l = 0.1,
                      environment = parent.frame(),
                      ...) {
@@ -49,6 +51,11 @@ ggscplot <- function(data = NULL,
                        features = features,featuresAnno = featuresAnno,
                        pct.exp.var = pct.exp.var,
                        slot = slot)
+
+    # add levels
+    if(!is.null(gene.order) & !is.null(features)){
+      data$gene_name <- factor(data$gene_name,levels = gene.order)
+    }
   }
 
   p <- ggplot(data = data,
