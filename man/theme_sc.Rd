@@ -17,7 +17,6 @@ theme_sc(
   r = 0.1,
   b = 0.1,
   l = 0.1,
-  key.size = 5,
   ...
 )
 }
@@ -45,8 +44,6 @@ theme_sc(
 \item{b}{the bottom margin of the plot (default is 0.1 npc).}
 
 \item{l}{the left margin of the plot (default is 0.1 npc).}
-
-\item{key.size}{legend size (default is 5).}
 
 \item{...}{Additional arguments passed to ggplot2 theme.}
 }
