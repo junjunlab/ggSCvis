@@ -270,7 +270,7 @@ GeomSCtile <- ggproto("GeomSCtile", ggplot2::GeomRect,
                                               just = c("left", "top"),
                                               gp = gpar(
                                                 col = coords$colour,
-                                                fill = fill_alpha(coords$fill, coords$alpha),
+                                                fill = alpha(coords$fill, coords$alpha),
                                                 lwd = coords$linewidth * .pt,
                                                 lty = coords$linetype,
                                                 linejoin = linejoin,
