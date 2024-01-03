@@ -38,7 +38,13 @@ fetch_data <- function(object = NULL,
                        slot = c("data","counts")){
   slot <- match.arg(slot,c("data","counts"))
 
+  options(warn=-1)
+  # Suppress summarise info
+  options(dplyr.summarise.inform = FALSE)
+
+  # ============================================================================
   # get reduction data
+  # ============================================================================
   reduc <- data.frame(Seurat::Embeddings(object, reduction = reduction))
   colnames(reduc) <- paste0("Dim",1:2)
 
@@ -70,31 +76,50 @@ fetch_data <- function(object = NULL,
 
     # calculate mean expression and median expression
     ave_exp <- megredf %>% dplyr::group_by(.data[["gene_name"]],.data[[pct.exp.var]]) %>%
-      dplyr::summarise(mean_exp = mean(value),median_exp = median(value))
+      dplyr::summarise(mean_exp = mean(value),median_exp = median(value)) %>%
+      dplyr::ungroup()
+
+    # calculate percent expression
+    gene_pct <- megredf %>% dplyr::group_by(.data[["gene_name"]],.data[[pct.exp.var]]) %>%
+      dplyr::summarise(pct = Seurat::PercentAbove(value,threshold = 0)*100) %>%
+      dplyr::ungroup()
+
+    # add feature anno
+    fanno <- data.frame(gene_name = features,featureAnno = featuresAnno)
+
+    # merge additional meta
+    megredf <- megredf %>%
+      dplyr::left_join(y = gene_pct,by = c("gene_name",pct.exp.var)) %>%
+      dplyr::left_join(y = ave_exp,by = c("gene_name",pct.exp.var)) %>%
+      dplyr::left_join(y = fanno,by = c("gene_name"),
+                       relationship = "many-to-many")
 
     # add feature anno
     # x = 1
-    lapply(seq_along(features), function(x){
-      tmp <- subset(megredf,gene_name %in% features[x])
-      tmp$featureAnno <- featuresAnno[x]
-
-      # add percent expression
-      pctexp <- tmp %>% dplyr::group_by(.data[[pct.exp.var]]) %>%
-        dplyr::summarise(pct = Seurat::PercentAbove(value,threshold = 0)*100)
-
-      tmp <- tmp %>% dplyr::left_join(y = pctexp,by = pct.exp.var)
-
-      # add mean median exp
-      tmp_ave_exp <- subset(ave_exp,gene_name %in% features[x],select = -gene_name)
-      tmp <- tmp %>% dplyr::left_join(y = tmp_ave_exp,by = pct.exp.var)
-
-      return(tmp)
-    }) %>% Reduce("rbind",.) -> megredf
+    # lapply(seq_along(features), function(x){
+    #   tmp <- subset(megredf,gene_name %in% features[x])
+    #   tmp$featureAnno <- featuresAnno[x]
+    #
+    #   # add percent expression
+    #   pctexp <- tmp %>% dplyr::group_by(.data[[pct.exp.var]]) %>%
+    #     dplyr::summarise(pct = Seurat::PercentAbove(value,threshold = 0)*100)
+    #
+    #   tmp <- tmp %>% dplyr::left_join(y = pctexp,by = pct.exp.var)
+    #
+    #   # add mean median exp
+    #   tmp_ave_exp <- subset(ave_exp,gene_name %in% features[x],select = -gene_name)
+    #   tmp <- tmp %>% dplyr::left_join(y = tmp_ave_exp,by = pct.exp.var)
+    #
+    #   return(tmp)
+    # }) %>% Reduce("rbind",.) -> megredf
 
     # ==========================================================================
     # add suffix for duplicate features
-    if(length(featuresAnno) > 1){
-      uni_f <- unique(features)
+    gs <- table(features) > 1
+    dup_genes <- names(gs)[gs]
+
+    if(length(dup_genes) > 0){
+      uni_f <- dup_genes
       lapply(seq_along(uni_f), function(x){
         tmp <- subset(megredf,gene_name %in% uni_f[x])
         anno_f <- unique(tmp$featureAnno)
@@ -111,12 +136,15 @@ fetch_data <- function(object = NULL,
         }else{
           return(tmp)
         }
-      }) %>% Reduce("rbind",.) %>% dplyr::arrange(.data[["featureAnno"]]) -> megredf
+      }) %>% Reduce("rbind",.) %>% dplyr::arrange(.data[["featureAnno"]]) -> dup_df
 
-      # order
-      od <- unique(megredf[,c("featureAnno","gene_name")])
-      megredf$gene_name <- factor(megredf$gene_name,levels = od$gene_name)
+      # rbind
+      megredf <- rbind(dup_df,subset(megredf,gene_name %in% setdiff(features,dup_genes)))
     }
+
+    # order
+    od <- unique(megredf[,c("featureAnno","gene_name")])
+    megredf$gene_name <- factor(megredf$gene_name,levels = od$gene_name)
 
     megredf <- megredf %>% dplyr::group_by(.data[["gene_name"]]) %>%
       dplyr::arrange(.data[["value"]])

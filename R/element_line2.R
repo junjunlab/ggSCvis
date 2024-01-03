@@ -65,7 +65,7 @@ element_line2 <- function(colour = NULL, linewidth = NULL, linetype = NULL,
 #' @importFrom ggplot2 element_grob
 #' @method element_grob element_line2
 #' @export
-element_grob.element_line2 <- function(element,
+element_grob.element_line2 <- function(element,...,
                                        x = 0:1, y = 0:1,
                                        colour = NULL, linewidth = NULL, linetype = NULL, lineend = NULL,
                                        default.units = "npc", id.lengths = NULL, size = deprecated()) {

@@ -14,6 +14,7 @@ Imports:
     circlize,
     cli,
     dplyr,
+    ggcirclize,
     ggdendro,
     ggh4x,
     ggplot2,
@@ -26,3 +27,7 @@ Imports:
     stats,
     tibble,
     tidyr
+Remotes:
+  junjunlab/ggcirclize,
+  teunbrand/ggh4x,
+  jokergoo/circlize
