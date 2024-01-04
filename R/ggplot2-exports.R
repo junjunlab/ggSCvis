@@ -1,0 +1,8 @@
+scale_flip_position <- getFromNamespace("scale_flip_position","ggplot2")
+default_expansion <- getFromNamespace("default_expansion","ggplot2")
+expand_limits_scale <- getFromNamespace("expand_limits_scale","ggplot2")
+dist_polar <- getFromNamespace("dist_polar","ggplot2")
+rename <- getFromNamespace("rename","ggplot2")
+ggname <- getFromNamespace("ggname","ggplot2")
+draw_axis <- getFromNamespace("draw_axis","ggplot2")
+render_axis <- getFromNamespace("render_axis","ggplot2")
