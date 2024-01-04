@@ -28,6 +28,7 @@ Imports:
     stats,
     tibble,
     tidyr,
+    utils,
     vctrs
 Remotes:
   junjunlab/ggcirclize,

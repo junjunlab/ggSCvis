@@ -24,7 +24,7 @@
 #' @import ggplot2
 #' @import scales
 #' @import rlang
-#' @import vctrs
+#' @importFrom vctrs vec_interleave
 #' @importFrom ggcirclize as.radian as.theta
 #'
 #' @export
