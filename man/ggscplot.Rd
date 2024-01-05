@@ -39,7 +39,7 @@ ggscplot(
 
 \item{slot}{The data slot to use from the Seurat object (default is "data").}
 
-\item{gene.order}{description}
+\item{gene.order}{Character vectors to reorder the gene labels.}
 
 \item{t}{the top margin of the plot (default is 0.1 npc).}
 

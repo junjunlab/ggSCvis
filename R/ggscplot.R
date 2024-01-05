@@ -12,7 +12,7 @@
 #' @param pct.exp.var A variable for percentage of expression (default is "seurat_clusters").
 #' @param slot The data slot to use from the Seurat object (default is "data").
 #' @param environment The levels of the gene name.
-#' @param gene.order description
+#' @param gene.order Character vectors to reorder the gene labels.
 #' @param t the top margin of the plot (default is 0.1 npc).
 #' @param r the right margin of the plot (default is 0.1 npc).
 #' @param b the bottom margin of the plot (default is 0.1 npc).
