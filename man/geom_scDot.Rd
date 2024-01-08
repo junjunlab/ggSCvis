@@ -40,6 +40,7 @@ geom_scDot(
   branch.height = 0.05,
   branch.len = 0.8,
   branch.lwd = 0.5,
+  branch.label.rot = NULL,
   branch.label.size = 10,
   branch.label.shift = 0.2
 )
@@ -114,6 +115,8 @@ geom_scDot(
 \item{branch.len}{The length of the annotation segment.}
 
 \item{branch.lwd}{The line width of the annotation segment.}
+
+\item{branch.label.rot}{The angle of labels on the annotation segment.}
 
 \item{branch.label.size}{The font size of labels on the annotation segment.}
 

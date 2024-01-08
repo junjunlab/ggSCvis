@@ -40,6 +40,7 @@
 #' @param branch.len The length of the annotation segment.
 #' @param branch.height The height of the annotation segment.
 #' @param branch.lwd The line width of the annotation segment.
+#' @param branch.label.rot The angle of labels on the annotation segment.
 #' @param branch.label.size The font size of labels on the annotation segment.
 #' @param branch.label.shift The shift of labels from the annotation segment.
 #' @param trim If TRUE (default), trim the tails of the violins to the range of the data.
@@ -81,6 +82,7 @@ geom_scViolin <- function(mapping = NULL, data = NULL, stat = "identity",
                           branch.height = 0.05,
                           branch.len = 0.8,
                           branch.lwd = 0.5,
+                          branch.label.rot = NULL,
                           branch.label.size = 10,
                           branch.label.shift = 0.2,
                           trim = TRUE) {
@@ -121,6 +123,7 @@ geom_scViolin <- function(mapping = NULL, data = NULL, stat = "identity",
                   branch.height = branch.height,
                   branch.len = branch.len,
                   branch.lwd = branch.lwd,
+                  branch.label.rot = branch.label.rot,
                   branch.label.size = branch.label.size,
                   branch.label.shift = branch.label.shift,
                   trim = trim,
@@ -162,14 +165,15 @@ GeomSCviolin <- ggplot2::ggproto("GeomSCviolin", ggplot2::Geom,
                                                        new.xlabel.size = 8,
                                                        new.xlabel.face = "plain",
                                                        new.xlabel.rot = 90,
-                                                       tree.x.shift = tree.x.shift,
-                                                       tree.y.shift = tree.y.shift,
+                                                       tree.x.shift = 0,
+                                                       tree.y.shift = 0,
                                                        # =======================
                                                        branch.side = "top",
                                                        branch.shift = 0,
                                                        branch.height = 0.05,
                                                        branch.len = 0.8,
                                                        branch.lwd = 0.5,
+                                                       branch.label.rot = NULL,
                                                        branch.label.size = 10,
                                                        branch.label.shift = 0.2,
                                                        trim = TRUE) {
@@ -255,6 +259,7 @@ GeomSCviolin <- ggplot2::ggproto("GeomSCviolin", ggplot2::Geom,
                                                                      branch.height = branch.height,
                                                                      branch.len = branch.len,
                                                                      branch.lwd = branch.lwd,
+                                                                     branch.label.rot = branch.label.rot,
                                                                      branch.label.size = branch.label.size,
                                                                      branch.label.shift = branch.label.shift)
 

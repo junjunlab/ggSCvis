@@ -40,6 +40,7 @@
 #' @param branch.len The length of the annotation segment.
 #' @param branch.height The height of the annotation segment.
 #' @param branch.lwd The line width of the annotation segment.
+#' @param branch.label.rot The angle of labels on the annotation segment.
 #' @param branch.label.size The font size of labels on the annotation segment.
 #' @param branch.label.shift The shift of labels from the annotation segment.
 #'
@@ -80,6 +81,7 @@ geom_scDot <- function(mapping = NULL, data = NULL,
                        branch.height = 0.05,
                        branch.len = 0.8,
                        branch.lwd = 0.5,
+                       branch.label.rot = NULL,
                        branch.label.size = 10,
                        branch.label.shift = 0.2) {
   layer(
@@ -120,6 +122,7 @@ geom_scDot <- function(mapping = NULL, data = NULL,
       branch.height = branch.height,
       branch.len = branch.len,
       branch.lwd = branch.lwd,
+      branch.label.rot = branch.label.rot,
       branch.label.size = branch.label.size,
       branch.label.shift = branch.label.shift,
       ...
@@ -172,6 +175,7 @@ GeomSCdot <- ggproto("GeomSCdot", Geom,
                                            branch.height = 0.05,
                                            branch.len = 0.8,
                                            branch.lwd = 0.5,
+                                           branch.label.rot = NULL,
                                            branch.label.size = 10,
                                            branch.label.shift = 0.2) {
 
@@ -234,6 +238,7 @@ GeomSCdot <- ggproto("GeomSCdot", Geom,
                                                          branch.height = branch.height,
                                                          branch.len = branch.len,
                                                          branch.lwd = branch.lwd,
+                                                         branch.label.rot = branch.label.rot,
                                                          branch.label.size = branch.label.size,
                                                          branch.label.shift = branch.label.shift)
 
