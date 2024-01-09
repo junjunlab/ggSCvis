@@ -41,6 +41,7 @@
 #' @param branch.height The height of the annotation segment.
 #' @param branch.lwd The line width of the annotation segment.
 #' @param branch.label.rot The angle of labels on the annotation segment.
+#' @param branch.label.hjust The hjust of labels on the annotation segment.
 #' @param branch.label.size The font size of labels on the annotation segment.
 #' @param branch.label.shift The shift of labels from the annotation segment.
 #' @param linejoin linejoin
@@ -84,6 +85,7 @@ geom_scTile <- function(mapping = NULL, data = NULL,
                         branch.len = 0.8,
                         branch.lwd = 0.5,
                         branch.label.rot = NULL,
+                        branch.label.hjust = NULL,
                         branch.label.size = 10,
                         branch.label.shift = 0.2) {
   layer(
@@ -126,6 +128,7 @@ geom_scTile <- function(mapping = NULL, data = NULL,
       branch.len = branch.len,
       branch.lwd = branch.lwd,
       branch.label.rot = branch.label.rot,
+      branch.label.hjust = branch.label.hjust,
       branch.label.size = branch.label.size,
       branch.label.shift = branch.label.shift,
       ...
@@ -195,6 +198,7 @@ GeomSCtile <- ggproto("GeomSCtile", ggplot2::GeomRect,
                                             branch.len = 0.8,
                                             branch.lwd = 0.5,
                                             branch.label.rot = NULL,
+                                            branch.label.hjust = NULL,
                                             branch.label.size = 10,
                                             branch.label.shift = 0.2){
                         # =====================================================
@@ -253,6 +257,7 @@ GeomSCtile <- ggproto("GeomSCtile", ggplot2::GeomRect,
                                                           branch.len = branch.len,
                                                           branch.lwd = branch.lwd,
                                                           branch.label.rot = branch.label.rot,
+                                                          branch.label.hjust = branch.label.hjust,
                                                           branch.label.size = branch.label.size,
                                                           branch.label.shift = branch.label.shift)
 

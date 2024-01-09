@@ -11,6 +11,7 @@
 #' @param branch.height The height of the annotation segment.
 #' @param branch.lwd The line width of the annotation segment.
 #' @param branch.label.rot The angle of labels on the annotation segment.
+#' @param branch.label.hjust The hjust of labels on the annotation segment.
 #' @param branch.label.size The font size of labels on the annotation segment.
 #' @param branch.label.shift The shift of labels from the annotation segment.
 #'
@@ -25,6 +26,7 @@ create_annosegment <- function(data = NULL,panel_params = NULL,
                                branch.height = 0.05,
                                branch.lwd = 0.5,
                                branch.label.rot = NULL,
+                               branch.label.hjust = NULL,
                                branch.label.size = 10,
                                branch.label.shift = 0.2){
   branch.side <- match.arg(branch.side,c("top","right","bottom","left"))
@@ -161,6 +163,7 @@ create_annosegment <- function(data = NULL,panel_params = NULL,
                         vp = vp)
 
   if(!is.null(branch.label.rot)) label.rot <- branch.label.rot
+  if(!is.null(label.hjust)) label.hjust <- branch.label.hjust
 
   label_grob <- textGrob(label = seg_df$celltype,
                          x = labelx,

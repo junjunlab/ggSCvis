@@ -13,6 +13,7 @@ create_annosegment(
   branch.height = 0.05,
   branch.lwd = 0.5,
   branch.label.rot = NULL,
+  branch.label.hjust = NULL,
   branch.label.size = 10,
   branch.label.shift = 0.2
 )
@@ -33,6 +34,8 @@ create_annosegment(
 \item{branch.lwd}{The line width of the annotation segment.}
 
 \item{branch.label.rot}{The angle of labels on the annotation segment.}
+
+\item{branch.label.hjust}{The hjust of labels on the annotation segment.}
 
 \item{branch.label.size}{The font size of labels on the annotation segment.}
 
