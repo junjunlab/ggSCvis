@@ -10,6 +10,9 @@
 #' @param features A vector of features to include in the plot (optional).
 #' @param featuresAnno Annotation level for features (default is 0).
 #' @param pct.exp.var A variable for percentage of expression (default is "seurat_clusters").
+#' @param group.vars The column names in metadata which you want to combine,
+#' useful for facet plot, the new combined column name is "group.vars" and value
+#' column name is "group.value" (default is NULL).
 #' @param slot The data slot to use from the Seurat object (default is "data").
 #' @param environment The levels of the gene name.
 #' @param gene.order Character vectors to reorder the gene labels.
@@ -38,6 +41,7 @@ ggscplot <- function(data = NULL,
                      pct.exp.var = "seurat_clusters",
                      slot = "data",
                      gene.order = NULL,
+                     group.vars = NULL,
                      t = 0.1,r = 0.1,b = 0.1,l = 0.1,
                      environment = parent.frame(),
                      ...) {
@@ -50,6 +54,7 @@ ggscplot <- function(data = NULL,
     data <- fetch_data(object = object,reduction = reduction,
                        features = features,featuresAnno = featuresAnno,
                        pct.exp.var = pct.exp.var,
+                       group.vars = group.vars,
                        slot = slot)
 
     # add levels

@@ -10,6 +10,9 @@ globalVariables(c("value",".","gene_name","Dim1","Dim2","featureAnno","celltype"
 #' @param features A vector of features (genes) to fetch expression data for (optional).
 #' @param featuresAnno Annotation level for features (default is 0).
 #' @param pct.exp.var A variable for percentage of expressed variance (default is "seurat_clusters").
+#' @param group.vars The column names in metadata which you want to combine,
+#' useful for facet plot, the new combined column name is "group.vars" and value
+#' column name is "group.value" (default is NULL).
 #' @param slot The data slot to use from the Seurat object ("data" or "counts").
 #'
 #' @return A data frame containing the combined single-cell data.
@@ -35,6 +38,7 @@ fetch_data <- function(object = NULL,
                        features = NULL,
                        featuresAnno = 0,
                        pct.exp.var = "seurat_clusters",
+                       group.vars = NULL,
                        slot = c("data","counts")){
   slot <- match.arg(slot,c("data","counts"))
 
@@ -58,6 +62,17 @@ fetch_data <- function(object = NULL,
 
   # add cell
   pc12$cell <- rownames(pc12)
+
+  # ============================================================================
+  # group some variables in meta
+  if(!is.null(group.vars)){
+    pc12 <- reshape2::melt(pc12,
+                           id.vars = setdiff(x = colnames(pc12),y = group.vars),
+                           variable.name = "group.vars",
+                           value.name = "group.value")
+  }
+
+  # ============================================================================
 
   # get gene expression
   if(!is.null(features)){

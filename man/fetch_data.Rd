@@ -10,6 +10,7 @@ fetch_data(
   features = NULL,
   featuresAnno = 0,
   pct.exp.var = "seurat_clusters",
+  group.vars = NULL,
   slot = c("data", "counts")
 )
 }
@@ -23,6 +24,10 @@ fetch_data(
 \item{featuresAnno}{Annotation level for features (default is 0).}
 
 \item{pct.exp.var}{A variable for percentage of expressed variance (default is "seurat_clusters").}
+
+\item{group.vars}{The column names in metadata which you want to combine,
+useful for facet plot, the new combined column name is "group.vars" and value
+column name is "group.value" (default is NULL).}
 
 \item{slot}{The data slot to use from the Seurat object ("data" or "counts").}
 }

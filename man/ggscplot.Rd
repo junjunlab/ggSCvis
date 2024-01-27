@@ -14,6 +14,7 @@ ggscplot(
   pct.exp.var = "seurat_clusters",
   slot = "data",
   gene.order = NULL,
+  group.vars = NULL,
   t = 0.1,
   r = 0.1,
   b = 0.1,
@@ -40,6 +41,10 @@ ggscplot(
 \item{slot}{The data slot to use from the Seurat object (default is "data").}
 
 \item{gene.order}{Character vectors to reorder the gene labels.}
+
+\item{group.vars}{The column names in metadata which you want to combine,
+useful for facet plot, the new combined column name is "group.vars" and value
+column name is "group.value" (default is NULL).}
 
 \item{t}{the top margin of the plot (default is 0.1 npc).}
 
