@@ -1,7 +1,3 @@
-len0_null <- getFromNamespace('len0_null', 'ggplot2')
-modify_list <- getFromNamespace("modify_list", "ggplot2")
-deprecate_soft0 <- getFromNamespace("deprecate_soft0", "ggplot2")
-
 
 
 #' element_line2 control the axis line length
@@ -78,11 +74,11 @@ element_grob.element_line2 <- function(element,...,
   # The gp settings can override element_gp
   gp <- gpar(
     col = colour, fill = colour,
-    lwd = len0_null(linewidth * .pt), lty = linetype, lineend = lineend
+    lwd = linewidth, lty = linetype, lineend = lineend
   )
   element_gp <- gpar(
     col = element$colour, fill = element$colour,
-    lwd = len0_null(element$linewidth * .pt), lty = element$linetype,
+    lwd = linewidth, lty = element$linetype,
     lineend = element$lineend
   )
   arrow <- if (is.logical(element$arrow) && !element$arrow) {

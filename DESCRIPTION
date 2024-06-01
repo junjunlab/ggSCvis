@@ -1,6 +1,6 @@
 Package: ggSCvis
 Title: Visualize Single Cell data Using GGplot2
-Version: 0.0.2
+Version: 0.0.3
 Author: Jun Zhang
 Maintainer: Jun Zhang <3219030654@stu.cpu.edu.cn>
 BugReports: https://github.com/junjunlab/ggSCvis/issues
