@@ -122,6 +122,8 @@ facet_wrapnew <- function(facets, nrow = NULL, ncol = NULL, scales = "fixed",
 #' @format NULL
 #' @usage NULL
 #' @export
+#' @importFrom vctrs vec_cbind vec_match
+#' @import gtable
 FacetWrapNew <- ggproto("FacetWrapNew", FacetWrap,
                         # ===========================================================================
                         # compute_layout
@@ -150,7 +152,6 @@ FacetWrapNew <- ggproto("FacetWrapNew", FacetWrap,
                           panels$SCALE_X <- if (params$free$x) seq_len(n) else 1L
                           panels$SCALE_Y <- if (params$free$y) seq_len(n) else 1L
 
-                          print(panels)
                           panels
                         },
 
@@ -191,8 +192,6 @@ FacetWrapNew <- ggproto("FacetWrapNew", FacetWrap,
                           keys <- join_keys(facet_vals, layout, by = names(vars))
 
                           data$PANEL <- layout$PANEL[match(keys$x, keys$y)]
-
-                          print(layout)
 
                           data
 

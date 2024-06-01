@@ -136,6 +136,8 @@ facet_gridnew <- function(rows = NULL, cols = NULL, scales = "fixed",
 #' @format NULL
 #' @usage NULL
 #' @export
+#' @importFrom vctrs vec_cbind vec_match
+#' @import gtable
 FacetGridNew <- ggproto("FacetGridNew", FacetGrid,
                         compute_layout = function(self, data, params) {
                           rows <- params$rows
