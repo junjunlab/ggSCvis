@@ -9,7 +9,7 @@ Description: Extract data from Seurat object and create different kinds of plot
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Imports: 
     circlize,
     cli,
@@ -19,6 +19,7 @@ Imports:
     ggh4x,
     ggplot2,
     grid,
+    gtable,
     lifecycle,
     magrittr,
     reshape2,
