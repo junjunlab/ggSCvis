@@ -17,7 +17,7 @@ element_line2(
   x.line.ed = 1,
   y.line.st = 0,
   y.line.ed = 1,
-  label.shift = -0.1,
+  label.shift = -2.5,
   label = "dim",
   fontface = "bold.italic",
   fontsize = 8
@@ -51,7 +51,7 @@ lengths in consecutive positions in the string.}
 
 \item{y.line.ed}{y line end position default(1).}
 
-\item{label.shift}{label distance to the line default(-0.1).}
+\item{label.shift}{Distance of the label from the axis line, in mm (default -2.5). Applied in absolute units so that the label keeps its offset under ggplot2 >= 4.0.}
 
 \item{label}{labels around the line default("dim").}
 

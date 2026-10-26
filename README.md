@@ -29,7 +29,7 @@ remotes::install_github("junjunlab/ggSCvis")
 ---
 
 ## News
-- 2026/10/26   (**v0.0.4** Compatible with Seurat v4/v5 and ggplot2 4.0+; fix duplicated dots in **geom_scDot**.)
+- 2026/10/26   (**v0.0.4** Compatible with Seurat v4/v5 and ggplot2 4.0+; fix duplicated dots in **geom_scDot**; fix **theme_sc/element_line2** axis labels overlapping the arrow under ggplot2 4.0.)
 - 2024/01/03   (Adding **geom_marklabel** funcs.)
 - 2023/12/21  (Adding **geom_scDot/geom_scTile/geom_scViolin** funcs.)
 - 2023/12/15  (First version pushed.)
@@ -37,7 +37,7 @@ remotes::install_github("junjunlab/ggSCvis")
 
 ## Documentation
 
--
+- [**User Guide**](docs/USAGE.md) — a full **pbmc3k** walk-through with 11 figures: installation, data preparation, every plot type, dendrograms, faceting, annotation, theming and troubleshooting.
 
 ---
 

@@ -12,7 +12,10 @@
 #' @param x.line.ed x line end position default(1).
 #' @param y.line.st y line start position default(0).
 #' @param y.line.ed y line end position default(1).
-#' @param label.shift label distance to the line default(-0.1).
+#' @param label.shift distance of the label from the axis line, in **mm**
+#'    (default -2.5). It is applied in absolute units so that the label keeps
+#'    its offset under ggplot2 >= 4.0, where the axis-line viewport has no
+#'    height/width and an npc offset would collapse to zero.
 #' @param label labels around the line default("dim").
 #' @param fontface label fontface default("bold.italic").
 #' @param fontsize label fontsize default(8).
@@ -33,7 +36,7 @@ element_line2 <- function(colour = NULL, linewidth = NULL, linetype = NULL,
                           inherit.blank = FALSE, size = lifecycle::deprecated(),
                           x.line.st = 0,x.line.ed = 1,
                           y.line.st = 0,y.line.ed = 1,
-                          label.shift = -0.1,label = "dim",
+                          label.shift = -2.5,label = "dim",
                           fontface = "bold.italic",fontsize = 8) {
 
   if (lifecycle::is_present(size)) {
@@ -98,21 +101,28 @@ element_grob.element_line2 <- function(element,...,
 
   # ============================================================================
   # labels
+  # The axis-line grob is drawn in a viewport with ~zero height (x axis) or
+  # ~zero width (y axis).  Under ggplot2 >= 4.0 an npc offset therefore
+  # collapses to zero and the label lands on top of the line, so the
+  # perpendicular offset is applied in absolute units (mm) instead.
+  shift_mm <- unit(element$label.shift, "mm")
+
   if(element$y.line.st == element$y.line.ed){
-    label.x = (element$x.line.st + element$x.line.ed)*0.5
-    label.y = element$label.shift
-    rot = 0
+    # horizontal (x) axis: the line sits at y = 1 npc
+    label.x <- unit((element$x.line.st + element$x.line.ed) * 0.5, "npc")
+    label.y <- unit(1, "npc") + shift_mm
+    rot <- 0
   }else{
-    label.y = (element$y.line.st + element$y.line.ed)*0.5
-    label.x = element$label.shift
-    rot = 90
+    # vertical (y) axis: the line sits at x = 1 npc
+    label.y <- unit((element$y.line.st + element$y.line.ed) * 0.5, "npc")
+    label.x <- unit(1, "npc") + shift_mm
+    rot <- 90
   }
 
   label.grob <- textGrob(label = element$label,
                          x = label.x,y = label.y,
                          rot = rot,
-                         gp = gpar(fontface = element$fontface,fontsize = element$fontsize),
-                         default.units = default.units)
+                         gp = gpar(fontface = element$fontface,fontsize = element$fontsize))
 
   gTree(children = gList(line.grob,label.grob))
 }

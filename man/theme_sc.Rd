@@ -29,7 +29,7 @@ theme_sc(
 
 \item{y.label}{Label for the y-axis (default is "dim 1").}
 
-\item{label.shift}{Shift for axis labels (default is -2.5).}
+\item{label.shift}{Distance of the axis label from the axis line, in mm (default is -2.5).}
 
 \item{fontsize}{Font size for labels (default is 10).}
 
