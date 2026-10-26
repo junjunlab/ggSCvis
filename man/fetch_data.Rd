@@ -23,7 +23,7 @@ fetch_data(
 
 \item{featuresAnno}{Annotation level for features (default is 0).}
 
-\item{pct.exp.var}{A variable for percentage of expressed variance (default is "seurat_clusters").}
+\item{pct.exp.var}{A variable used to summarise the percentage of expressing cells and the mean expression (default is "seurat_clusters"). It must be the same variable that you map to the grouping axis of the plot (usually \code{y}), otherwise several dots with different sizes end up on top of each other and some points appear to have a double border.}
 
 \item{group.vars}{The column names in metadata which you want to combine,
 useful for facet plot, the new combined column name is "group.vars" and value

@@ -9,7 +9,11 @@ globalVariables(c("value",".","gene_name","Dim1","Dim2","featureAnno","celltype"
 #' @param reduction The reduction method to use (default is "umap").
 #' @param features A vector of features (genes) to fetch expression data for (optional).
 #' @param featuresAnno Annotation level for features (default is 0).
-#' @param pct.exp.var A variable for percentage of expressed variance (default is "seurat_clusters").
+#' @param pct.exp.var A variable used to summarise the percentage of expressing
+#' cells and the mean expression (default is "seurat_clusters"). It must be the
+#' same variable that you map to the grouping axis of the plot (usually `y`),
+#' otherwise several dots with different sizes end up on top of each other and
+#' some points appear to have a double border.
 #' @param group.vars The column names in metadata which you want to combine,
 #' useful for facet plot, the new combined column name is "group.vars" and value
 #' column name is "group.value" (default is NULL).
@@ -76,7 +80,10 @@ fetch_data <- function(object = NULL,
 
   # get gene expression
   if(!is.null(features)){
-    geneExp <- Seurat::FetchData(object = object, vars = features,slot = slot)
+    # SeuratObject >= 5.0.0 made `slot` defunct in FetchData() and replaced it
+    # with `layer`; .fetch_expression() picks the right argument so that both
+    # Seurat v4 (Assay) and Seurat v5 (Assay5) objects work.
+    geneExp <- .fetch_expression(object = object, features = features, slot = slot)
 
     # cbind
     mer <- cbind(pc12, geneExp)

@@ -9,7 +9,10 @@
 #' @param reduction The reduction method to use (default is "umap").
 #' @param features A vector of features to include in the plot (optional).
 #' @param featuresAnno Annotation level for features (default is 0).
-#' @param pct.exp.var A variable for percentage of expression (default is "seurat_clusters").
+#' @param pct.exp.var A variable used to summarise the percentage of expressing
+#' cells and the mean expression (default is "seurat_clusters"). It must match
+#' the variable mapped to the grouping axis (usually `y`), e.g. use
+#' `pct.exp.var = "celltype"` when you plot `y = celltype`.
 #' @param group.vars The column names in metadata which you want to combine,
 #' useful for facet plot, the new combined column name is "group.vars" and value
 #' column name is "group.value" (default is NULL).

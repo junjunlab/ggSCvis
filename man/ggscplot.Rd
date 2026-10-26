@@ -36,7 +36,7 @@ ggscplot(
 
 \item{featuresAnno}{Annotation level for features (default is 0).}
 
-\item{pct.exp.var}{A variable for percentage of expression (default is "seurat_clusters").}
+\item{pct.exp.var}{A variable used to summarise the percentage of expressing cells and the mean expression (default is "seurat_clusters"). It must match the variable mapped to the grouping axis (usually \code{y}), e.g. use \code{pct.exp.var = "celltype"} when you plot \code{y = celltype}.}
 
 \item{slot}{The data slot to use from the Seurat object (default is "data").}
 

@@ -1,6 +1,6 @@
 Package: ggSCvis
 Title: Visualize Single Cell data Using GGplot2
-Version: 0.0.3
+Version: 0.0.4
 Author: Jun Zhang
 Maintainer: Jun Zhang <3219030654@stu.cpu.edu.cn>
 BugReports: https://github.com/junjunlab/ggSCvis/issues
@@ -26,6 +26,7 @@ Imports:
     rlang,
     scales,
     Seurat,
+    SeuratObject,
     stats,
     tibble,
     tidyr,

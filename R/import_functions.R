@@ -11,11 +11,11 @@ id <- getFromNamespace("id","ggplot2")
 # wrap_layout <- getFromNamespace("wrap_layout","ggplot2")
 convertInd <- getFromNamespace("convertInd","ggplot2")
 censor_labels <- getFromNamespace("censor_labels","ggplot2")
-is.zero <- getFromNamespace("is.zero","ggplot2")
-weave_axes <- getFromNamespace("weave_axes","ggplot2")
+# is.zero(), check_labeller() and weave_axes() changed in ggplot2 4.0.0, they
+# are now resolved lazily in R/utils-compat.R to stay compatible with both
+# ggplot2 3.5.x and 4.x.
 weave_tables_row <- getFromNamespace("weave_tables_row","ggplot2")
 weave_tables_col <- getFromNamespace("weave_tables_col","ggplot2")
-check_labeller <- getFromNamespace("check_labeller","ggplot2")
 data_frame0 <- getFromNamespace("data_frame0","ggplot2")
 grid_as_facets_list <- getFromNamespace("grid_as_facets_list","ggplot2")
 df.grid <- getFromNamespace("df.grid","ggplot2")
@@ -73,6 +73,13 @@ wrap_layout <- function(id, dims, dir) {
 
 
 wrap_as_facets_list <- function(x) {
-  facets_list <- as_facets_list(x)
-  compact_facets(facets_list)
+  # ggplot2 >= 4.0.0: compact_facets() already normalises its input through
+  # as_facets_list(). Calling as_facets_list() first would nest the
+  # (rows, cols) pair returned for a formula and create a bogus facet, which
+  # then fails with "Can't recycle `<quos>` ...".
+  if (.ggsc_gg_ge("4.0.0")) {
+    compact_facets(x)
+  } else {
+    compact_facets(as_facets_list(x))
+  }
 }

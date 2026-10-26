@@ -192,6 +192,33 @@ GeomSCdot <- ggproto("GeomSCdot", Geom,
                        data <- unique(data)
 
                        # =====================================================
+                       # one dot per (x, y) position
+                       #
+                       # Several rows can share the same position when the
+                       # percentage / mean expression are summarised with a
+                       # grouping variable that differs from the variable
+                       # mapped to `y` (e.g. the default
+                       # `pct.exp.var = "seurat_clusters"` while `y = celltype`).
+                       # Those rows have different `pct` values and therefore
+                       # different sizes, so several circles get stacked on top
+                       # of each other and show up as a "double border"
+                       # (see https://github.com/junjunlab/ggSCvis/issues/5).
+                       pos <- data[, c("x", "y"), drop = FALSE]
+                       if (anyDuplicated(pos)) {
+                         cli::cli_warn(
+                           c(
+                             "Multiple values found for the same {.code x}/{.code y} position in {.fn geom_scDot}.",
+                             "i" = "Only the largest point of each position is drawn.",
+                             "i" = "This usually means {.arg pct.exp.var} does not match the variable mapped to {.code y}; for example use {.code pct.exp.var = \"celltype\"} when {.code y = celltype}."
+                           ),
+                           .frequency = "once",
+                           .frequency_id = "ggscvis_scdot_dup_position"
+                         )
+                         data <- data[order(data$x, data$y, -data$size), , drop = FALSE]
+                         data <- data[!duplicated(data[, c("x", "y"), drop = FALSE]), , drop = FALSE]
+                       }
+
+                       # =====================================================
                        # add dendrogram to row or col
                        if(add.tree == TRUE){
                          grobs <- create_dendrogrob(data = data,
